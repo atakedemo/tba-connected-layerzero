@@ -1,0 +1,22 @@
+{
+  "bsc-testnet": {
+    "startMintId": 1,
+    "endMintId": 10
+  },
+  "fuji": {
+    "startMintId": 11,
+    "endMintId": 20
+  },
+  "goerli": {
+    "startMintId": 21,
+    "endMintId": 30
+  },
+  "mumbai": {
+    "startMintId": 1,
+    "endMintId": 20
+  },
+  "sepolia": {
+    "startMintId": 1,
+    "endMintId": 10
+  }
+}

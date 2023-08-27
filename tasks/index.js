@@ -1,3 +1,6 @@
+task("sendReqTba", "Send Request for Check NFT Owner", require("./sendReqTba"))
+    .addParam("targetNetwork", "the target network name, ie: fuji, or mumbai, etc (from hardhat.config.js)")
+
 // set the Oracle address for the OmniCounter
 // example:
 task("omniCounterSetOracle", "set the UA (an OmniCounter contract) to use the specified oracle for the destination chain", require("./omniCounterSetOracle"))
@@ -40,7 +43,7 @@ task("swapNativeForNative", "swap native on one chain thru StargateComposed to n
     .addParam("srcPoolId", "the poolId to bridge")
     .addParam("dstPoolId", "the poolId to bridge")
     .addParam("qty", "the quanitty of native to swap in")
-
+/*
 task("pingPongSetTrustedRemote", "set the trusted remote", require("./pingPongSetTrustedRemote")).addParam(
     "targetNetwork",
     "the targetNetwork to set as trusted"
@@ -50,9 +53,10 @@ task("ping", "call ping to start the pingPong with the target network", require(
     "targetNetwork",
     "the targetNetwork to commence pingponging with"
 )
+*/
 
 task("getSigners", "show the signers of the current mnemonic", require("./getSigners")).addOptionalParam("n", "how many to show", 3, types.int)
-
+/*
 task("approveERC1155", "approve it to transfer my nfts", require("./approveERC1155")).addParam("addr", "the address to approve")
 
 task("sendProxyONFT1155", "send a tokenid and quantity", require("./sendProxyONFT1155"))
@@ -76,6 +80,7 @@ task("batchSendONFT1155", "send a tokenid and quantity", require("./batchSendONF
     .addParam("targetNetwork", "the destination chainId")
     .addParam("tokenIds", "the NFT tokenId")
     .addParam("quantities", "the quantity of NFT tokenId to send")
+*/
 
 // uint qty,
 // address bridgeToken,                    // the address of the native ERC20 to swap() - *must* be the token for the poolId
@@ -111,7 +116,7 @@ task(
     .addOptionalParam("remoteContract", "Name of remote contract if the names are different")
     .addOptionalParam("contract", "If both contracts are the same name")
 
-//
+/*
 task("oftSend", "send tokens to another chain", require("./oftSend"))
     .addParam("qty", "qty of tokens to send")
     .addParam("targetNetwork", "the target network to let this instance receive messages from")
@@ -172,7 +177,7 @@ task("getStoredPayloadEvent", "Detect and clear stored payload", require('./getS
     .addOptionalParam("txEnd", "provide a tx hash in the block you want to end at")
     .addOptionalParam("step", "provide a tx hash in the block you want to end at", 1000, types.int)
     .addOptionalParam("nonce", "nonce to clear")
-
+*/
 //
 task("getMessageFailedEvent", "Detect and clear failed message", require('./getMessageFailedEvent'))
     .addParam("txStart", "provide a transaction hash in the block you want to start in")

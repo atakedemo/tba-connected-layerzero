@@ -10,35 +10,12 @@ require('hardhat-deploy-ethers');
 require('@openzeppelin/hardhat-upgrades');
 require('./tasks');
 
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners();
-
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
-
-function getMnemonic(networkName) {
-  if (networkName) {
-    const mnemonic = process.env['MNEMONIC_' + networkName.toUpperCase()]
-    if (mnemonic && mnemonic !== '') {
-      return mnemonic
-    }
-  }
-
-  const mnemonic = process.env.MNEMONIC
-  if (!mnemonic || mnemonic === '') {
-    return 'test test test test test test test test test test test junk'
-  }
-
-  return mnemonic
-}
-
-function accounts(chainKey) {
-  return { mnemonic: getMnemonic(chainKey) }
-}
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const API_URL_MUMBAI = process.env.API_URL_MUMBAI;
+const API_URL_SHIBUYA = process.env.API_URL_SHIBUYA;
+const API_URL_SEPOLIA = process.env.API_URL_SEPOLIA;
+const API_KEY_MUMBAI = process.env.API_KEY_MUMBAI;
+const API_KEY_SHIBUYA = process.env.API_KEY_SHIBUYA;
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -106,78 +83,49 @@ module.exports = {
     ethereum: {
       url: "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161", // public infura endpoint
       chainId: 1,
-      accounts: accounts(),
-    },
-    bsc: {
-      url: "https://bsc-dataseed1.binance.org",
-      chainId: 56,
-      accounts: accounts(),
+      accounts: [ PRIVATE_KEY ],
     },
     avalanche: {
       url: "https://api.avax.network/ext/bc/C/rpc",
       chainId: 43114,
-      accounts: accounts(),
+      accounts: [ PRIVATE_KEY ],
     },
     polygon: {
       url: "https://rpc-mainnet.maticvigil.com",
       chainId: 137,
-      accounts: accounts(),
-    },
-    arbitrum: {
-      url: `https://arb1.arbitrum.io/rpc`,
-      chainId: 42161,
-      accounts: accounts(),
-    },
-    optimism: {
-      url: `https://mainnet.optimism.io`,
-      chainId: 10,
-      accounts: accounts(),
-    },
-    fantom: {
-      url: `https://rpcapi.fantom.network`,
-      chainId: 250,
-      accounts: accounts(),
-    },
-    metis: {
-      url: `https://andromeda.metis.io/?owner=1088`,
-      chainId: 1088,
-      accounts: accounts(),
+      accounts: [ PRIVATE_KEY ],
     },
 
-    goerli: {
-      url: "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161", // public infura endpoint
-      chainId: 5,
-      accounts: accounts(),
-    },
-    'bsc-testnet': {
-      url: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
-      chainId: 97,
-      accounts: accounts(),
-    },
-    fuji: {
-      url: `https://api.avax-test.network/ext/bc/C/rpc`,
-      chainId: 43113,
-      accounts: accounts(),
+    sepolia: {
+      url: API_URL_SEPOLIA,
+      chainId: 11155111,
+      accounts: [ PRIVATE_KEY ],
     },
     mumbai: {
-      url: "https://rpc-mumbai.maticvigil.com/",
+      url: API_URL_MUMBAI,
       chainId: 80001,
-      accounts: accounts(),
+      accounts: [ PRIVATE_KEY ],
     },
-    'arbitrum-goerli': {
-      url: `https://goerli-rollup.arbitrum.io/rpc/`,
-      chainId: 421613,
-      accounts: accounts(),
-    },
-    'optimism-goerli': {
-      url: `https://goerli.optimism.io/`,
-      chainId: 420,
-      accounts: accounts(),
-    },
-    'fantom-testnet': {
-      url: `https://rpc.ankr.com/fantom_testnet`,
-      chainId: 4002,
-      accounts: accounts(),
+    shibuya: {
+      url: API_URL_SHIBUYA,
+      accounts: [PRIVATE_KEY]
     }
+  },
+  etherscan: {  // copy the Etherscan object from the verify Contracts secion on Dashboard 
+    apiKey: {
+      mch: 'abc',
+      polygonMumbai: API_KEY_MUMBAI
+    },
+    customChains: [
+      {
+        network: 'mch',
+        chainId: 420,
+        urls: {
+        // Blockscout
+        apiURL: 'https://explorer.oasys.sand.mchdfgh.xyz/api',
+        browserURL: 'https://explorer.oasys.sand.mchdfgh.xyz'
+        }
+       },
+    ],
   }
 };
